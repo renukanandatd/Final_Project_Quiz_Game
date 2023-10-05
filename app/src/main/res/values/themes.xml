@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.Final_Project_Quiz_Game" parent="Base.Theme.Final_Project_Quiz_Game" />
+
+    <style name="Theme.Sign_Up" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+    </style>
 </resources>
