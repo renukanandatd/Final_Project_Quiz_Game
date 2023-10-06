@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "284794522686",
+    "project_id": "quiz-game-cc3d1",
+    "storage_bucket": "quiz-game-cc3d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284794522686:android:e44e708241ff24e077956f",
+        "android_client_info": {
+          "package_name": "com.example.final_project_quiz_game"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARIWFX6pCQvuKJzrkPU8GGQ00VSmzu5j8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
