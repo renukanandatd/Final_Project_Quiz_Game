@@ -127,7 +127,6 @@ class LoginActivity : AppCompatActivity() {
         }
         catch (e:ApiException){
             Toast.makeText(applicationContext,e.localizedMessage,Toast.LENGTH_LONG).show()
-
         }
 
     }
