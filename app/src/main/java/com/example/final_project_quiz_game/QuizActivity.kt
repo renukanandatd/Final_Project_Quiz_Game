@@ -1,5 +1,6 @@
 package com.example.final_project_quiz_game
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -26,6 +27,10 @@ class QuizActivity : AppCompatActivity() {
     var questionCount = 0
     var questionNumber = 1
 
+    var userAnswer = ""
+    var answerCorrect = 0
+    var answerWrong = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         quizBinding = ActivityQuizBinding.inflate(layoutInflater)
@@ -41,20 +46,68 @@ class QuizActivity : AppCompatActivity() {
 
         }
         quizBinding.textViewOption1.setOnClickListener {
-
+            userAnswer = "a"
+            if(userAnswer==correctAnswer){
+                quizBinding.textViewOption1.setBackgroundColor(Color.GREEN)
+                answerCorrect++
+                quizBinding.textViewCorrectAnswer.text = answerCorrect.toString()
+            }else{
+                quizBinding.textViewOption1.setBackgroundColor(Color.RED)
+                answerWrong++
+                quizBinding.textViewCorrectAnswer.text = answerWrong.toString()
+                findAnswer()
+            }
+            disableClickable()
         }
         quizBinding.textViewOption2.setOnClickListener {
-
+            userAnswer = "b"
+            if(userAnswer==correctAnswer){
+                quizBinding.textViewOption2.setBackgroundColor(Color.GREEN)
+                answerCorrect++
+                quizBinding.textViewCorrectAnswer.text = answerCorrect.toString()
+            }else{
+                quizBinding.textViewOption2.setBackgroundColor(Color.RED)
+                answerWrong++
+                quizBinding.textViewCorrectAnswer.text = answerWrong.toString()
+                findAnswer()
+            }
+            disableClickable()
         }
         quizBinding.textViewOption3.setOnClickListener {
-
+            userAnswer = "c"
+            if(userAnswer==correctAnswer){
+                quizBinding.textViewOption3.setBackgroundColor(Color.GREEN)
+                answerCorrect++
+                quizBinding.textViewCorrectAnswer.text = answerCorrect.toString()
+            }else{
+                quizBinding.textViewOption3.setBackgroundColor(Color.RED)
+                answerWrong++
+                quizBinding.textViewCorrectAnswer.text = answerWrong.toString()
+                findAnswer()
+            }
+            disableClickable()
         }
         quizBinding.textViewOption4.setOnClickListener {
-
+            userAnswer = "d"
+            if(userAnswer==correctAnswer){
+                quizBinding.textViewOption4.setBackgroundColor(Color.GREEN)
+                answerCorrect++
+                quizBinding.textViewCorrectAnswer.text = answerCorrect.toString()
+            }else{
+                quizBinding.textViewOption4.setBackgroundColor(Color.RED)
+                answerWrong++
+                quizBinding.textViewCorrectAnswer.text = answerWrong.toString()
+                findAnswer()
+            }
+            disableClickable()
         }
+
     }
 
     private fun gameLogic(){
+
+        restoreOptions()
+
         databaseReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -91,5 +144,31 @@ class QuizActivity : AppCompatActivity() {
             }
 
         })
+    }
+    fun findAnswer(){
+        when(correctAnswer){
+            "a" -> quizBinding.textViewOption1.setBackgroundColor(Color.GREEN)
+            "b" -> quizBinding.textViewOption2.setBackgroundColor(Color.GREEN)
+            "c" -> quizBinding.textViewOption3.setBackgroundColor(Color.GREEN)
+            "d" -> quizBinding.textViewOption4.setBackgroundColor(Color.GREEN)
+        }
+    }
+    fun disableClickable(){
+        quizBinding.textViewOption1.isClickable = false
+        quizBinding.textViewOption2.isClickable = false
+        quizBinding.textViewOption3.isClickable = false
+        quizBinding.textViewOption4.isClickable = false
+    }
+
+    fun restoreOptions(){
+        quizBinding.textViewOption1.setBackgroundColor(Color.WHITE)
+        quizBinding.textViewOption2.setBackgroundColor(Color.WHITE)
+        quizBinding.textViewOption3.setBackgroundColor(Color.WHITE)
+        quizBinding.textViewOption4.setBackgroundColor(Color.WHITE)
+
+        quizBinding.textViewOption1.isClickable = true
+        quizBinding.textViewOption2.isClickable = true
+        quizBinding.textViewOption3.isClickable = true
+        quizBinding.textViewOption4.isClickable = true
     }
 }
