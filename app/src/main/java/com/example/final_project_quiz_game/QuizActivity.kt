@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import kotlin.random.Random
 
 class QuizActivity : AppCompatActivity() {
 
@@ -29,7 +30,7 @@ class QuizActivity : AppCompatActivity() {
     var optionD = ""
     var correctAnswer = ""
     var questionCount = 0
-    var questionNumber = 1
+    var questionNumber = 0
 
     var userAnswer = ""
     var answerCorrect = 0
@@ -44,11 +45,20 @@ class QuizActivity : AppCompatActivity() {
     val user = auth.currentUser
     val scoreRef = database.reference
 
+    var questions = HashSet<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         quizBinding = ActivityQuizBinding.inflate(layoutInflater)
         val view = quizBinding.root
         setContentView(view)
+
+        do{
+
+            val number = Random.nextInt(1,6)
+            questions.add(number)
+
+        }while(questions.size<4)
 
         gameLogic()
 
@@ -156,14 +166,14 @@ class QuizActivity : AppCompatActivity() {
 
                 questionCount = snapshot.childrenCount.toInt()
 
-                if(questionNumber<=questionCount){
+                if(questionNumber < questions.size){
 
-                    question = snapshot.child(questionNumber.toString()).child("q").value.toString()
-                    optionA = snapshot.child(questionNumber.toString()).child("a").value.toString()
-                    optionB = snapshot.child(questionNumber.toString()).child("b").value.toString()
-                    optionC = snapshot.child(questionNumber.toString()).child("c").value.toString()
-                    optionD = snapshot.child(questionNumber.toString()).child("d").value.toString()
-                    correctAnswer = snapshot.child(questionNumber.toString()).child("answer").value.toString()
+                    question = snapshot.child(questions.elementAt(questionNumber).toString()).child("q").value.toString()
+                    optionA = snapshot.child(questions.elementAt(questionNumber).toString()).child("a").value.toString()
+                    optionB = snapshot.child(questions.elementAt(questionNumber).toString()).child("b").value.toString()
+                    optionC = snapshot.child(questions.elementAt(questionNumber).toString()).child("c").value.toString()
+                    optionD = snapshot.child(questions.elementAt(questionNumber).toString()).child("d").value.toString()
+                    correctAnswer = snapshot.child(questions.elementAt(questionNumber).toString()).child("answer").value.toString()
 
                     quizBinding.textViewQuestion.text = question
                     quizBinding.textViewOption1.text = optionA
